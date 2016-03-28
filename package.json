@@ -1,0 +1,27 @@
+{
+  "name": "react-callback-props-decorator",
+  "version": "0.0.1",
+  "description": "Decorate functions as react callback props",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+      "react": "x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edli/react-callback-props-decorator.git"
+  },
+  "keywords": [
+    "react",
+    "callback",
+    "props"
+  ],
+  "author": "Aleksey Rubtsov (https://github.com/edli/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edli/react-callback-props-decorator/issues"
+  },
+  "homepage": "https://github.com/edli/react-callback-props-decorator#readme"
+}

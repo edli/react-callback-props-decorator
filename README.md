@@ -29,6 +29,22 @@ Pay attention: for now decorators can be used with transpilers such as [Babel](h
 **To Babel 6 users:**
 For now decorators syntax is not final. So you may use [babel-plugin-transform-decorators-legacy](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy).
 
+**To autobind-decorator users:**
+Make sure you apply callback before autobind-decorator as it returns accessor descriptor.
+
+Example:
+```
+Bad:
+    @callback
+    @autobind
+    handleSomething() { ... }
+
+Good:
+    @autobind
+    @callback
+    handleSomething() { ... }
+```
+
 Installation:
 
     % npm install react-callback-props-decorator

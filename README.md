@@ -1,6 +1,6 @@
 # React callback props decorator
 
-A method decorator which wraps original handlers with similar-name callback invoke.
+A non-parametrized method decorator which wraps original handlers with similar-name callback invoke.
 This is particularly useful for situations like React components, where
 you often pass callbacks as props and you have to invoke them explicitly.
 ```
@@ -21,10 +21,30 @@ class Component extends React.Component {
         // do some useful work
     }
 }
-
 ```
 
-Pay attention: for now decorators can be used with transpilers such as [Babel](http://babeljs.io);
+A parametrized method decorator invokes callback with specified name.
+```
+Before:
+class Component extends React.Component {
+    handleSomething(args) {
+        // do some useful work
+        if (this.props.onAnything) {
+            this.props.onAnything(args);
+        }
+    }
+}
+
+After:
+class Component extends React.Component {
+    @callback('onAnything')
+    handleSomething(args) { // camelCaseName
+        // do some useful work
+    }
+}
+```
+
+Pay attention: for now decorators can be used with transpilers such as [Babel](http://babeljs.io)
 
 **To Babel 6 users:**
 For now decorators syntax is not final. So you may use [babel-plugin-transform-decorators-legacy](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy).

@@ -15,8 +15,6 @@
 
 'use strict';
 
-var React = require('react');
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });

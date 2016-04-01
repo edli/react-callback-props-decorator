@@ -44,6 +44,50 @@ class Component extends React.Component {
 }
 ```
 
+Or you can parametrize your callback with value-converting function.
+```
+Before:
+class Component extends React.Component {
+    handleSomething(args) {
+        // do some useful work
+        if (this.props.onSomething) {
+            this.props.onSomething(args.inner);
+        }
+    }
+}
+
+After:
+class Component extends React.Component {
+    @callback(args => args.inner)
+    handleSomething(args) { // camelCaseName
+        // do some useful work
+    }
+}
+```
+
+Or you can use both parameters.
+```
+Before:
+class Component extends React.Component {
+    handleSomething(args) {
+        // do some useful work
+        if (this.props.onAnything) {
+            this.props.onAnything(args.inner);
+        }
+    }
+}
+
+After:
+class Component extends React.Component {
+    @callback('onAnything', args => args.inner)
+    handleSomething(args) { // camelCaseName
+        // do some useful work
+    }
+}
+```
+
+But please, **DO NOT** overuse converting function parameter. It is just a helper for elementary cases.
+
 Pay attention: for now decorators can be used with transpilers such as [Babel](http://babeljs.io)
 
 **To Babel 6 users:**

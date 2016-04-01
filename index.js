@@ -24,17 +24,39 @@ exports['default'] = callback;
  * add callback invoke after original handler
  */
 function callback() {
-    if (arguments.length === 1 && typeof arguments[0] === 'string') {
-        var callbackName = arguments[0];
+    if (arguments.length === 0) {
+        // sanitizing
         return function(target, name, descriptor) {
-            return wrapHandler(target, name, descriptor, callbackName);
+            return wrapHandler.apply(undefined, arguments);
+        }
+    } if (arguments.length === 1) {
+        if (typeof arguments[0] === 'string') {
+            // developer specified a callback name
+            var callbackName = arguments[0];
+            return function(target, name, descriptor) {
+                return wrapHandler(target, name, descriptor, callbackName);
+            };
+        } else if (typeof arguments[0] === 'function') {
+            // developer specified a value-converting function
+            var converter = arguments[0];
+            return function(target, name, descriptor) {
+                return wrapHandler(target, name, descriptor, null, converter);
+            };
+        }
+    } else if (arguments.length === 2 && typeof arguments[0] === 'string' && typeof arguments[1] === 'function') {
+        // developer specified a callback name and a value-converting function
+        var callbackName = arguments[0];
+        var converter = arguments[1];
+        return function(target, name, descriptor) {
+            return wrapHandler(target, name, descriptor, callbackName, converter);
         };
     } else {
+        // non-parametrized usage
         return wrapHandler.apply(undefined, arguments);
     }
 }
 
-function wrapHandler(target, name, descriptor, callbackName) {
+function wrapHandler(target, name, descriptor, callbackName, converter) {
     var handler = descriptor.value;
     if (typeof handler !== 'function') {
         return descriptor;
@@ -43,10 +65,10 @@ function wrapHandler(target, name, descriptor, callbackName) {
     callbackName = callbackName || getCallbackName(name);
 
     function invokeWrapped() {
-        handler.call(this, arguments);
+        handler.apply(this, arguments);
 
         if (this.props[callbackName]) {
-            this.props[callbackName](arguments);
+            this.props[callbackName].apply(undefined, converter ? converter.apply(undefined, arguments) : arguments);
         }
     };
 

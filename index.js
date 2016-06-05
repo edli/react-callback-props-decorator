@@ -68,7 +68,15 @@ function wrapHandler(target, name, descriptor, callbackName, converter) {
         handler.apply(this, arguments);
 
         if (this.props[callbackName]) {
-            this.props[callbackName].apply(undefined, converter ? converter.apply(undefined, arguments) : arguments);
+            var args;
+            if (converter) {
+                args = converter.apply(undefined, arguments);
+                args.length = Object.keys(args).length;
+            } else {
+                args = arguments;
+            }
+
+            this.props[callbackName].apply(undefined, args);
         }
     };
 

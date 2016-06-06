@@ -1,6 +1,6 @@
 {
   "name": "react-callback-props-decorator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Decorate functions as react callback props",
   "main": "index.js",
   "scripts": {

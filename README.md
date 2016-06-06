@@ -1,10 +1,13 @@
 # React callback props decorator
 
+[![Build Status](https://travis-ci.org/nik-kor/react-callback-props-decorator.svg?branch=master)](https://travis-ci.org/nik-kor/react-callback-props-decorator)
+
 A non-parametrized method decorator which wraps original handlers with similar-name callback invoke.
 This is particularly useful for situations like React components, where
 you often pass callbacks as props and you have to invoke them explicitly.
-```
-Before:
+
+```js
+// Before:
 class Component extends React.Component {
     handleSomething(args) {
         // do some useful work
@@ -14,7 +17,7 @@ class Component extends React.Component {
     }
 }
 
-After:
+// After:
 class Component extends React.Component {
     @callback
     handleSomething(args) { // camelCaseName
@@ -24,8 +27,9 @@ class Component extends React.Component {
 ```
 
 A parametrized method decorator invokes callback with specified name.
-```
-Before:
+
+```js
+// Before:
 class Component extends React.Component {
     handleSomething(args) {
         // do some useful work
@@ -35,7 +39,7 @@ class Component extends React.Component {
     }
 }
 
-After:
+// After:
 class Component extends React.Component {
     @callback('onAnything')
     handleSomething(args) { // camelCaseName
@@ -45,8 +49,8 @@ class Component extends React.Component {
 ```
 
 Or you can parametrize your callback with value-converting function.
-```
-Before:
+```js
+// Before:
 class Component extends React.Component {
     handleSomething(args) {
         // do some useful work
@@ -56,7 +60,7 @@ class Component extends React.Component {
     }
 }
 
-After:
+// After:
 class Component extends React.Component {
     @callback(args => args.inner)
     handleSomething(args) { // camelCaseName
@@ -66,8 +70,8 @@ class Component extends React.Component {
 ```
 
 Or you can use both parameters.
-```
-Before:
+```js
+// Before:
 class Component extends React.Component {
     handleSomething(args) {
         // do some useful work
@@ -77,7 +81,7 @@ class Component extends React.Component {
     }
 }
 
-After:
+// After:
 class Component extends React.Component {
     @callback('onAnything', args => args.inner)
     handleSomething(args) { // camelCaseName
@@ -97,33 +101,35 @@ For now decorators syntax is not final. So you may use [babel-plugin-transform-d
 Make sure you apply callback before autobind-decorator as it returns accessor descriptor.
 
 Example:
-```
-Bad:
-    @callback
-    @autobind
-    handleSomething() { ... }
+```js
+// Bad:
+@callback
+@autobind
+handleSomething() { ... }
 
-Good:
-    @autobind
-    @callback
-    handleSomething() { ... }
+// Good:
+@autobind
+@callback
+handleSomething() { ... }
 ```
 
 Installation:
-
-    % npm install react-callback-props-decorator
+```bash
+% npm install react-callback-props-decorator
+```
 
 Example:
+```jsx
+import callback from 'react-callback-props-decorator'
 
-    import callback from 'react-callback-props-decorator'
+class Component {
+  render() {
+    return <div onClick={ this.handleClick } />;
+  }
 
-    class Component {
-      render() {
-        return <div onClick={ this.handleClick } />;
-      }
-
-      @callback
-      handleClick() {
-        // do useful work here
-      }
-    }
+  @callback
+  handleClick() {
+    // do useful work here
+  }
+}
+```

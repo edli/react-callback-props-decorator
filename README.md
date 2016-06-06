@@ -1,6 +1,6 @@
 # React callback props decorator
 
-[![Build Status](https://travis-ci.org/nik-kor/react-callback-props-decorator.svg?branch=master)](https://travis-ci.org/nik-kor/react-callback-props-decorator)
+[![Build Status](https://travis-ci.org/edli/react-callback-props-decorator.svg?branch=master)](https://travis-ci.org/edli/react-callback-props-decorator.svg?branch=master)
 
 A non-parametrized method decorator which wraps original handlers with similar-name callback invoke.
 This is particularly useful for situations like React components, where

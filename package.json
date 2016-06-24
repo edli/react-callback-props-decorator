@@ -1,6 +1,6 @@
 {
   "name": "react-callback-props-decorator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Decorate functions as react callback props",
   "main": "index.js",
   "scripts": {
@@ -20,9 +20,6 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/edli/react-callback-props-decorator/issues"
-  },
-  "peerDependencies": {
-    "react": ">=14.0.0"
   },
   "homepage": "https://github.com/edli/react-callback-props-decorator#readme",
   "devDependencies": {
